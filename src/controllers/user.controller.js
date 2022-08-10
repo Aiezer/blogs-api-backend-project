@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const { createUser } = require('../services/user.service');
+const { createUser, getAllUsers, deleteAllUsers } = require('../services/user.service');
 
 const createUserController = async (req, res) => {
     try {
@@ -12,4 +12,22 @@ const createUserController = async (req, res) => {
     }
 };
 
-module.exports = { createUserController };
+const getAllUsersController = async (req, res) => {
+    try {
+        const result = await getAllUsers();
+        return res.status(StatusCodes.OK).json(result);
+    } catch (error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    }
+};
+
+const deleteAllUsersController = async (req, res) => {
+    try {
+        const result = await deleteAllUsers();
+        return res.status(StatusCodes.OK).json(result);
+    } catch (error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    }
+};
+
+module.exports = { createUserController, getAllUsersController, deleteAllUsersController };
