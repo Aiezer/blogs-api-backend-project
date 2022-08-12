@@ -8,6 +8,7 @@ const {
 const {
   createUserController,
   getAllUsersController,
+  getByIdController,
   deleteAllUsersController,
 } = require('../controllers/user.controller.js');
 const { validateToken } = require('../middlewares/validateToken.middleware.js');
@@ -23,6 +24,7 @@ router.post(
   createUserController,
 );
 router.get('/', validateToken, getAllUsersController);
+router.get('/:id', validateToken, getByIdController);
 router.delete('/', deleteAllUsersController);
 
 module.exports = router;
