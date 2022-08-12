@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const { createCategory } = require('../services/category.service');
+const { createCategory, getAllCategories } = require('../services/category.service');
 
 const createCategoryController = async (req, res) => {
   try {
@@ -18,4 +18,15 @@ const createCategoryController = async (req, res) => {
   }
 };
 
-module.exports = { createCategoryController };
+const getAllCategoriesController = async (req, res) => {
+  try {
+    const result = await getAllCategories();
+    return res.status(StatusCodes.OK).json(result);
+  } catch (error) {
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: error.message });
+  }
+};
+
+module.exports = { createCategoryController, getAllCategoriesController };
