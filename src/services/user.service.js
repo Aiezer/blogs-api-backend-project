@@ -17,11 +17,6 @@ const getAllUsers = async () => {
   return users;
 };
 
-const deleteAllUsers = async () => {
-  const users = await User.destroy({ where: {} });
-  return users;
-};
-
 const getById = async (id) => {
   const user = await User.findOne({
     where: { id },
@@ -30,4 +25,4 @@ const getById = async (id) => {
   return user;
 }; 
 
-module.exports = { createUser, getAllUsers, deleteAllUsers, getById };
+module.exports = { createUser, getAllUsers, getById };
