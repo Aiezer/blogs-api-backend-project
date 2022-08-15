@@ -12,6 +12,7 @@ const {
   getAllPostsController,
   getPostByIdController,
   updatePostController,
+  deletePostController,
 } = require('../controllers/post.controller');
 
 router.post('/', validateToken, validateFieldsForCreate, createPostController);
@@ -23,5 +24,6 @@ router.put(
   validateFieldsForUpdate,
   updatePostController,
 );
+router.delete('/:id', validateToken, deletePostController);
 
 module.exports = router;

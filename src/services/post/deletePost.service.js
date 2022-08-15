@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 const { getPostById } = require('./getPosts.service');
 
-const updatePost = async (id, data, userId) => {
+const deletePost = async (id, userId) => {
   const post = await getPostById(id);
   if (!post) {
     return {
@@ -15,8 +15,10 @@ const updatePost = async (id, data, userId) => {
       message: 'Unauthorized user',
     };
   }
-  const updatedPost = await post.update(data);
-  return updatedPost;
+  await post.destroy();
+  return {
+    statusCode: StatusCodes.NO_CONTENT,
+  };
 };
 
-module.exports = { updatePost };
+module.exports = { deletePost };

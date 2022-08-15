@@ -4,6 +4,7 @@ const {
   getAllPosts,
   getPostById,
   updatePost,
+  deletePost,
 } = require('../services/post/index');
 
 const createPostController = async (req, res) => {
@@ -76,9 +77,30 @@ const updatePostController = async (req, res) => {
   }
 };
 
+const deletePostController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await deletePost(id, req.user.id);
+    if (
+      result.statusCode === StatusCodes.NOT_FOUND
+      || result.statusCode === StatusCodes.UNAUTHORIZED
+    ) {
+      return res.status(result.statusCode).json({
+        message: result.message,
+      });
+    }
+    return res.status(StatusCodes.NO_CONTENT).json();
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   createPostController,
   getAllPostsController,
   getPostByIdController,
   updatePostController,
+  deletePostController,
 };
