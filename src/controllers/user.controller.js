@@ -3,14 +3,13 @@ const {
   createUser,
   getAllUsers,
   getById,
-} = require('../services/user.service');
+} = require('../services/user/user.service');
 
 const createUserController = async (req, res) => {
   try {
     const { displayName, email, password, image } = req.body;
     const result = await createUser({ displayName, email, password, image });
-    console.log('result', result);
-    return res.status(StatusCodes.CREATED).json(result);
+    return res.status(StatusCodes.CREATED).json({ ...result });
   } catch (error) {
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)

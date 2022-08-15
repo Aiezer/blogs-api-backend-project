@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const { createCategory, getAllCategories } = require('../services/category.service');
+const { createCategory, getAllCategories } = require('../services/category/category.service');
 
 const createCategoryController = async (req, res) => {
   try {
