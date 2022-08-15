@@ -1,4 +1,3 @@
-// const { StatusCodes } = require('http-status-codes');
 const { BlogPost, Category, User } = require('../../database/models');
 
 const getAllPosts = async () => {
