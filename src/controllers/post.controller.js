@@ -5,6 +5,7 @@ const {
   getPostById,
   updatePost,
   deletePost,
+  searchPost,
 } = require('../services/post/index');
 
 const createPostController = async (req, res) => {
@@ -97,10 +98,25 @@ const deletePostController = async (req, res) => {
   }
 };
 
+const searchPostController = async (req, res) => {
+  try {
+    const { q } = req.query;
+    console.log('testando o search', q);
+    const result = await searchPost(q);
+    console.log('result', result);
+    return res.status(StatusCodes.OK).json(result);
+  } catch (error) {
+    // return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    //   message: error.message,
+    // });
+  }
+};
+
 module.exports = {
   createPostController,
   getAllPostsController,
   getPostByIdController,
   updatePostController,
   deletePostController,
+  searchPostController,
 };

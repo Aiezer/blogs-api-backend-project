@@ -13,10 +13,12 @@ const {
   getPostByIdController,
   updatePostController,
   deletePostController,
+  searchPostController,
 } = require('../controllers/post.controller');
 
 router.post('/', validateToken, validateFieldsForCreate, createPostController);
 router.get('/', validateToken, getAllPostsController);
+router.get('/search', validateToken, searchPostController);
 router.get('/:id', validateToken, getPostByIdController);
 router.put(
   '/:id',
